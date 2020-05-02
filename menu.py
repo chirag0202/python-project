@@ -31,7 +31,7 @@ Press g: Exit to main menu""")
     elif dc=='g':
      return
     else:
-     print("Wrong Choice!!!")
+     os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
 
 
 def docker():
@@ -63,11 +63,11 @@ Press h: Go back to main menu""")
    elif dchoice=='h':
     return
    else:
-    print("Wrong choice!!!!")
+    os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
 
 
 os.system("clear")
-os.system("tput setaf 1")
+os.system("tput setaf 4")
 print("\t\t\t\t",end='')
 os.system("tput smul")
 print("Welcome to my TUI")
@@ -86,17 +86,18 @@ os.system("tput setaf 7")
 
 passwd=getpass.getpass("Enter the password : ")
 if passwd!="redhat":
- input("Wrong Password")
+ input(os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """))
+ os.system("clear")
  exit()
 
 location=input("""Where would you like to perform your job?\na)Local\nb)Remote\nEnter your Choice- """)
 if location=='b':
     ip_r=input("Enter your IP : ")
-
+os.system("clear")
 
 
 while location=='a':
-    print("""\nPress 1 : Print Date
+    print("""Press 1 : Print Date
 Press 2 : Print Calendar
 Press 3 : Configure the web Server
 Press 4 : Create or Remove  User 
@@ -112,6 +113,7 @@ Press 13: Drives and Partition Management
 Press 0 : Exit""")
     c=int(input("Enter a choice: "))
     if c==0:
+        os.system("clear")
         exit()
     elif c==1:
     	print(os.system("date"))
@@ -154,7 +156,7 @@ Press 0 : Exit""")
     elif c==13:
      drive()
     else:
-     print("Wrong Choice!!!");
+     os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
     input("Press Enter to continue...")
     os.system("clear")
 
@@ -170,10 +172,12 @@ Press 7 : Edit a file
 Press 8 : Set-up networking
 Press 9 : Check if a software is already installed
 Press 10: Install a software from existing repo
-Press 11: Change IP
+Press 11: Open an installed software
+Press 12: Change IP
 Press 0 : Exit""")
     c=int(input("Enter a choice: "))
     if c==0:
+         os.system("clear")
          exit()
     elif c==1:
     	print(os.system("ssh {} date".format(ip_r)))
@@ -209,15 +213,16 @@ Press 0 : Exit""")
     elif c==10:
      soft_name=input("Enter the name of software: ")
      print(os.system("ssh {} dnf install {}".format(ip_r,soft_name)));
-    elif c==11:
-     ip_r=input("Enter your IP");
     elif c==12:
+     ip_r=input("Enter your IP");
+    elif c==11:
      os.system("ssh {} {}".format(ip_r,input("Enter the name of software : ")))
     else:
-     print("Wrong Choice!!!")
+     os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
     input("Press Enter to continue...")
     os.system("clear")
 
 if location!='a' or location!='b':
-    input("Wrong Choice!!!")
+    input(os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """))
+    os.system("clear")
 os.system("systemctl start firewalld")
