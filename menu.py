@@ -67,20 +67,40 @@ Press h: Go back to main menu""")
 
 
 os.system("clear")
-os.system("tput setaf 4")
+os.system("tput setaf 1")
 print("\t\t\t\t",end='')
-os.system("tput smul")
-print("Welcome to my TUI")
+os.system("tput bold")
+
+os.system("""COLUMNS=$(tput cols) 
+title="WELCOME To My TUI" 
+printf "%*s\n"  $(((${#title}+$COLUMNS)/2)) $(tput smul)"$title"  """)
 os.system("tput rmul")
+os.system("tput sgr0")
 os.system("tput setaf 7")
 
 os.system("tput setaf 3")
+
+print("\n")
+os.system("""COLUMNS=$(tput cols) 
+design="RRRRRRR II NN   NN GGGGGGG SSSSSS  OOOOOO FFFFFF  FFFFFF II RRRRRR EEEEEE" 
+printf "%*s\n"  $(((${#design}+$COLUMNS)/2)) "$design"  """)
+
+os.system("""COLUMNS=$(tput cols) 
+design="RR   RR II NNNN NN GG      SS      OO  OO FF      FF     II RR  RR EE" 
+printf "%*s\n"  $(((${#design}+$COLUMNS)/2-2)) "$design"  """)
+
+os.system("""COLUMNS=$(tput cols) 
+design="RRRRRRR II NN NNNN GG  GGG SSSSSS  OO  OO FFFFFF  FFFFFF II RRRRRR EEEEEE" 
+printf "%*s\n"  $(((${#design}+$COLUMNS)/2)) "$design"  """)
+
+os.system("""COLUMNS=$(tput cols) 
+design="RR  RR  II NN  NNN GG   GG     SS  OO  OO FF      FF     II RR RR  EE" 
+printf "%*s\n"  $(((${#design}+$COLUMNS)/2-2)) "$design"  """)
+
+os.system("""COLUMNS=$(tput cols) 
+design="RR   RR II NN   NN GGGGGGG SSSSSS  OOOOOO FF      FF     II RR  RR EEEEEE" 
+printf "%*s\n"  $(((${#design}+$COLUMNS)/2)) "$design"  """)
 print("""
-    RRRRRRR II NN   NN GGGGGGG SSSSSS  OOOOOO FFFFFF  FFFFFF II RRRRRR EEEEEE
-    RR   RR II NNNN NN GG      SS      OO  OO FF      FF     II RR  RR EE
-    RRRRRRR II NN NNNN GG  GGG SSSSSS  OO  OO FFFFFF  FFFFFF II RRRRRR EEEEEE
-    RR  RR  II NN  NNN GG   GG     SS  OO  OO FF      FF     II RR RR  EE
-    RR   RR II NN   NN GGGGGGG SSSSSS  OOOOOO FF      FF     II RR  RR EEEEEE
 """)
 os.system("tput setaf 7")
 
@@ -99,12 +119,12 @@ os.system("clear")
 while location=='a':
     print("""Press 1 : Print Date
 Press 2 : Print Calendar
-Press 3 : Configure the web Server
+Press 3 : Configure the web Server if already installed
 Press 4 : Create or Remove  User 
-Press 5 : Create a folder
-Press 6 : Create a file
-Press 7 : Edit a file
-Press 8 : Set-up networking
+Press 5 : View all folders and files
+Press 6 : Create a folder
+Press 7 : Create a file
+Press 8 : Edit a file
 Press 9 : Check if a software is already installed
 Press 10: Install a software from existing repo
 Press 11: Open a pre-installed software
@@ -120,7 +140,6 @@ Press 0 : Exit""")
     elif c==2:
     	print(os.system("cal"))
     elif c==3:
-     os.system("dnf install httpd")
      os.system("systemctl stop firewalld")
      os.system("systemctl start httpd")	
      print(os.system("systemctl status httpd"))
@@ -135,14 +154,16 @@ Press 0 : Exit""")
          os.system("userdel -r {}".format(u))
          print(os.system("id {}".format(u)))
     elif c==5:
+    	print(os.system("ls"))
+    elif c==6:
      folder_name=input("Enter folder name: ")
      os.system("mkdir {}".format(folder_name))
-    elif c==6:
-     file_name=input("Enter file name: ")
-     os.system("touch {}".format(file_name))
     elif c==7:
      file_name=input("Enter file name: ")
-     os.system("cat {}".format(file_name))
+     os.system("touch {}".format(file_name))
+    elif c==8:
+     file_name=input("Enter file name: ")
+     os.system("gedit {}".format(file_name))
     elif c==9:
      soft_name=input("Enter the name of software: ")
      print(os.system("rpm -q {}".format(soft_name)))
@@ -162,18 +183,19 @@ Press 0 : Exit""")
 
 
 while location=='b':
-    print("""\nPress 1 : Print Date
+    print("""Press 1 : Print Date
 Press 2 : Print Calendar
-Press 3 : Configure the web Server
-Press 4 : Create or Remove  User 
-Press 5 : Create a folder
-Press 6 : Create a file
-Press 7 : Edit a file
-Press 8 : Set-up networking
-Press 9 : Check if a software is already installed
-Press 10: Install a software from existing repo
+Press 3 : Configure the web Server if already installed
+Press 4 : Create or Remove  User
+Press 5 : View all folders and files
+Press 6 : Create a folder
+Press 7 : Create a file
+Press 8 : Edit a file
+Press 9 : Check if a software or service is already installed
+Press 10: Install a software or service from existing repo
 Press 11: Open an installed software
 Press 12: Change IP
+Press 13: Start an installed service
 Press 0 : Exit""")
     c=int(input("Enter a choice: "))
     if c==0:
@@ -184,7 +206,6 @@ Press 0 : Exit""")
     elif c==2:
     	print(os.system("ssh {} cal".format(ip_r)))
     elif c==3:
-     os.system("ssh {} dnf install httpd".format(ip_r))
      os.system("ssh {} systemctl stop firewalld".format(ip_r))
      os.system("ssh {} systemctl start httpd".format(ip_r))	
      print(os.system("ssh {} systemctl status httpd".format(ip_r)))
@@ -199,24 +220,28 @@ Press 0 : Exit""")
          os.system("ssh {} userdel -r {}".format(ip_r,u))
          print(os.system("ssh {} id {}".format(ip_r,u)))
     elif c==5:
+    	print(os.system("ssh {} ls".format(ip_r)))
+    elif c==6:
      folder_name=input("Enter folder name: ")
      os.system("ssh {} mkdir {}".format(ip_r,folder_name))
-    elif c==6:
-     file_name=input("Enter file name: ")
-     os.system("ssh {} touch {}".format(ip_r,folder_name))
     elif c==7:
      file_name=input("Enter file name: ")
-     os.system("ssh {} cat {}".format(ip_r,folder_name))
+     os.system("ssh {} touch {}".format(ip_r,folder_name))
+    elif c==8:
+     file_name=input("Enter file name: ")
+     os.system("ssh {} gedit {}".format(ip_r,folder_name))
     elif c==9:
-     soft_name=input("Enter the name of software: ")
+     soft_name=input("Enter the name of software or service: ")
      print(os.system("ssh {} rpm -q {}".format(ip_r,soft_name)));
     elif c==10:
-     soft_name=input("Enter the name of software: ")
+     soft_name=input("Enter the name of software or service: ")
      print(os.system("ssh {} dnf install {}".format(ip_r,soft_name)));
     elif c==12:
      ip_r=input("Enter your IP");
     elif c==11:
      os.system("ssh {} {}".format(ip_r,input("Enter the name of software : ")))
+    elif c==13:
+     os.system("ssh {} systemctl start {}".format(ip_r,input("Enter the name of service : ")))
     else:
      os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
     input("Press Enter to continue...")
