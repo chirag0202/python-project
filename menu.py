@@ -3,7 +3,12 @@ import getpass
 
 def drive():
     os.system("clear")
-    print("""Press a: List all the drives and their partition details
+    os.system("tput bold")
+    os.system("tput smul")
+    print("DRIVE")
+    os.system("tput sgr0")
+    os.system("tput rmul")
+    print("""\nPress a: List all the drives and their partition details
 Press b: List the partiions of a drive
 Press c: Partition a drive
 Press d: Format a drive
@@ -36,6 +41,11 @@ Press g: Exit to main menu""")
 
 def docker():
    os.system("clear")
+   os.system("tput bold")
+   os.system("tput smul")
+   print("DOCKER")
+   os.system("tput sgr0")
+   os.system("tput rmul")
    print("""Press a: Start docker\nPress b: Stop docker
 Press c: Install a new image
 Press d: Open a container
@@ -117,7 +127,12 @@ os.system("clear")
 
 
 while location=='a':
-    print("""Press 1 : Print Date
+    os.system("tput bold")
+    os.system("tput smul")
+    print("LOCAL")
+    os.system("tput sgr0")
+    os.system("tput rmul")
+    print("""\nPress 1 : Print Date
 Press 2 : Print Calendar
 Press 3 : Configure the web Server if already installed
 Press 4 : Create or Remove  User 
@@ -131,6 +146,7 @@ Press 11: Open a pre-installed software
 Press 12: Docker
 Press 13: Drives and Partition Management
 Press 14: Start an installed service
+Press 15: Stop a running service
 Press 0 : Exit""")
     c=int(input("Enter a choice: "))
     if c==0:
@@ -179,6 +195,8 @@ Press 0 : Exit""")
      drive()
     elif c==14:
      os.system("systemctl start {}".format(input("Enter the name of service : ")))
+    elif c==15:
+     os.system("systemctl stop {}".format(input("Enter the name of service : ")))
     else:
      os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
     input("Press Enter to continue...")
@@ -186,7 +204,12 @@ Press 0 : Exit""")
 
 
 while location=='b':
-    print("""Press 1 : Print Date
+    os.system("tput bold")
+    os.system("tput smul")
+    print("REMOTE")
+    os.system("tput sgr0")
+    os.system("tput rmul")
+    print("""\nPress 1 : Print Date
 Press 2 : Print Calendar
 Press 3 : Configure the web Server if already installed
 Press 4 : Create or Remove  User
@@ -199,6 +222,7 @@ Press 10: Install a software or service from existing repo
 Press 11: Open an installed software
 Press 12: Change IP
 Press 13: Start an installed service
+Press 13: Stop a running service
 Press 0 : Exit""")
     c=int(input("Enter a choice: "))
     if c==0:
@@ -245,6 +269,8 @@ Press 0 : Exit""")
      os.system("ssh {} {}".format(ip_r,input("Enter the name of software : ")))
     elif c==13:
      os.system("ssh {} systemctl start {}".format(ip_r,input("Enter the name of service : ")))
+    elif c==14:
+     os.system("ssh {} systemctl stop {}".format(ip_r,input("Enter the name of service : ")))
     else:
      os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
     input("Press Enter to continue...")
