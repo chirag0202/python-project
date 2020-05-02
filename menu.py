@@ -130,6 +130,7 @@ Press 10: Install a software from existing repo
 Press 11: Open a pre-installed software
 Press 12: Docker
 Press 13: Drives and Partition Management
+Press 14: Start an installed service
 Press 0 : Exit""")
     c=int(input("Enter a choice: "))
     if c==0:
@@ -176,6 +177,8 @@ Press 0 : Exit""")
      docker()
     elif c==13:
      drive()
+    elif c==14:
+     os.system("systemctl start {}".format(input("Enter the name of service : ")))
     else:
      os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
     input("Press Enter to continue...")
@@ -250,4 +253,4 @@ Press 0 : Exit""")
 if location!='a' or location!='b':
     input(os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """))
     os.system("clear")
-os.system("systemctl start firewalld")
+
