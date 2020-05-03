@@ -92,23 +92,23 @@ os.system("tput setaf 3")
 
 print("\n")
 os.system("""COLUMNS=$(tput cols) 
-design="RRRRRRR II NN   NN GGGGGGG SSSSSS  OOOOOO FFFFFF  FFFFFF II RRRRRR EEEEEE" 
+design="RRRRRRR II NN   NN GGGGGGG SSSSSS   OOOOOO FFFFFF   FFFFFF II RRRRRR EEEEEE" 
 printf "%*s\n"  $(((${#design}+$COLUMNS)/2)) "$design"  """)
 
 os.system("""COLUMNS=$(tput cols) 
-design="RR   RR II NNNN NN GG      SS      OO  OO FF      FF     II RR  RR EE" 
+design="RR   RR II NNNN NN GG      SS       OO  OO FF       FF     II RR  RR EE" 
 printf "%*s\n"  $(((${#design}+$COLUMNS)/2-2)) "$design"  """)
 
 os.system("""COLUMNS=$(tput cols) 
-design="RRRRRRR II NN NNNN GG  GGG SSSSSS  OO  OO FFFFFF  FFFFFF II RRRRRR EEEEEE" 
+design="RRRRRRR II NN NNNN GG  GGG SSSSSS   OO  OO FFFFFF   FFFFFF II RRRRRR EEEEEE" 
 printf "%*s\n"  $(((${#design}+$COLUMNS)/2)) "$design"  """)
 
 os.system("""COLUMNS=$(tput cols) 
-design="RR  RR  II NN  NNN GG   GG     SS  OO  OO FF      FF     II RR RR  EE" 
+design="RR  RR  II NN  NNN GG   GG     SS   OO  OO FF       FF     II RR RR  EE" 
 printf "%*s\n"  $(((${#design}+$COLUMNS)/2-2)) "$design"  """)
 
 os.system("""COLUMNS=$(tput cols) 
-design="RR   RR II NN   NN GGGGGGG SSSSSS  OOOOOO FF      FF     II RR  RR EEEEEE" 
+design="RR   RR II NN   NN GGGGGGG SSSSSS   OOOOOO FF       FF     II RR  RR EEEEEE" 
 printf "%*s\n"  $(((${#design}+$COLUMNS)/2)) "$design"  """)
 print("""
 """)
