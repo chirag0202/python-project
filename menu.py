@@ -52,25 +52,45 @@ Press d: Open a container
 Press e: Print already installed Images
 Press f: Display running containers
 Press g: Display all containers
-Press h: Go back to main menu""")
+Press h: Stop all running containers
+Press i: Stop a single container
+Press j: Remove all running containers
+Press k: Remove a single container
+Press l: Remove an installed image
+Press m: Remove all installed images
+Press n: Go back to main menu""")
    dchoice=input("Enter your choice : ")
    if dchoice=='a':
     os.system("systemctl start docker")	
-    print(os.system("systemctl status docker"))
+    os.system("systemctl status docker")
    elif dchoice=='b':
     os.system("systemctl stop docker")
-    print(os.system("systemctl status docker"))	
+    os.system("systemctl status docker")
    elif dchoice=='c':
      os.system("docker pull {}".format(input("Enter the name of image :\n(format)  <image name>  if you want the latest version else <image name>:<version>     :")))
    elif dchoice=='d':
      os.system("docker run -t -i {}".format(input("Enter the name of image :\n(format)  <container name>  if you want the latest version else <container  name>:<version>     :")))
    elif dchoice=='e':
-    print(os.system("docker images"))
+    os.system("docker images")
    elif dchoice=='f':
-    print(os.system("docker ps"))
+    os.system("docker ps")
    elif dchoice=='g':
-    print(os.system("docker ps -a"))
+    os.system("docker ps -a")  
    elif dchoice=='h':
+    os.system("docker stop $(docker ps -a)")
+   elif dchoice=='i':
+    id=input("Enter container id")
+    os.system("docker stop {}.format(id)") 
+   elif dchoice=='j':
+    os.system("docker rm -f $(docker ps -a)")
+   elif dchoice=='k':
+    id=input("Enter container id")
+    os.system("docker rm -f {}.format(id)")  
+   elif dchoice=='l':
+     os.system("docker rmi {}".format(input("Enter the name of image :\n(format)  <image name>  if you want the latest version else <image name>:<version>     :"))) 
+   elif dchoice=='m':
+     os.system("docker rmi $(docker images) -f") 
+   elif dchoice=='n':
     return
    else:
     os.system("""echo "$(tput setaf 1) $(tput blink) WRONG CHOICE!!! $(tput sgr0) $(tput setaf 7)" """)
@@ -159,7 +179,7 @@ Press 0 : Exit""")
     elif c==3:
      os.system("systemctl stop firewalld")
      os.system("systemctl start httpd")	
-     print(os.system("systemctl status httpd"))
+     os.system("systemctl status httpd")
     elif c==4:
         c1=input("""Choice:\na) Create User\nb) Remove User\nEnter choice-""")
         if c1=='a':
