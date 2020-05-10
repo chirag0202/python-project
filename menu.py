@@ -173,9 +173,9 @@ Press 0 : Exit""")
         os.system("clear")
         exit()
     elif c==1:
-    	print(os.system("date"))
+    	os.system("date")
     elif c==2:
-    	print(os.system("cal"))
+    	os.system("cal")
     elif c==3:
      os.system("systemctl stop firewalld")
      os.system("systemctl start httpd")	
@@ -249,13 +249,13 @@ Press 0 : Exit""")
          os.system("clear")
          exit()
     elif c==1:
-    	print(os.system("ssh {} date".format(ip_r)))
+        os.system("ssh {} date".format(ip_r))
     elif c==2:
-    	print(os.system("ssh {} cal".format(ip_r)))
+    	os.system("ssh {} cal".format(ip_r))
     elif c==3:
      os.system("ssh {} systemctl stop firewalld".format(ip_r))
      os.system("ssh {} systemctl start httpd".format(ip_r))	
-     print(os.system("ssh {} systemctl status httpd".format(ip_r)))
+     os.system("ssh {} systemctl status httpd".format(ip_r)
     elif c==4:
         c1=input("""Choice:\na) Create User\nb) Remove User\nEnter choice-""")
         if c1=='a':
